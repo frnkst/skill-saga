@@ -1,0 +1,15 @@
+{
+  "id": "saga-1",
+  "title": "The Lanternwood Promise",
+  "summary": "Restore the moon lantern before the forest festival begins.",
+  "coverImage": "🏮",
+  "audienceNote": "Short prompts, counting, and imagination for ages 5–6.",
+  "levels": [
+    {
+      "id": "lanternwood-arrival",
+      "levelNumber": 1,
+      "file": "level1.json",
+      "title": "The Whispering Gate"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "id": "workshop-in-the-sky",
+  "sagaId": "saga-2",
+  "levelNumber": 1,
+  "title": "Workshop in the Sky",
+  "date": "2026-09-05",
+  "introduction": "{{hero.name}} and {{sidekicks.0}} sail up to a workshop balanced on a cloud.",
+  "quests": [
+    {
+      "id": "repair-the-rain-dial",
+      "title": "Repair the Rain Dial",
+      "summary": "Match the machine parts and discover the secret repair word.",
+      "parts": [
+        {
+          "id": "pair-the-parts",
+          "title": "Pair the Parts",
+          "narrative": "Every tool belongs with one clockwork piece.",
+          "tasks": [
+            {
+              "id": "tool-part-matches",
+              "type": "matching",
+              "prompt": "Match each tool to the part it can fix.",
+              "points": 15,
+              "left": [
+                { "id": "tool-key", "label": "Tiny key" },
+                { "id": "tool-cloth", "label": "Soft cloth" }
+              ],
+              "right": [
+                { "id": "part-lock", "label": "Brass lock" },
+                { "id": "part-lens", "label": "Cloudy lens" }
+              ],
+              "answer": {
+                "pairs": [
+                  { "leftId": "tool-key", "rightId": "part-lock" },
+                  { "leftId": "tool-cloth", "rightId": "part-lens" }
+                ]
+              }
+            }
+          ],
+          "reward": {
+            "stars": 2,
+            "message": "The dial begins to hum."
+          }
+        },
+        {
+          "id": "invent-the-repair-word",
+          "title": "Invent a Repair Word",
+          "narrative": "The dial needs a brand-new cheerful word before it will turn.",
+          "tasks": [
+            {
+              "id": "create-repair-word",
+              "type": "creative-input",
+              "prompt": "Invent a cheerful word that sounds like a machine waking up.",
+              "points": 5,
+              "variableKey": "repair-word",
+              "minLength": 3,
+              "maxLength": 40,
+              "multiline": false
+            }
+          ],
+          "reward": {
+            "stars": 1,
+            "collectible": { "type": "story-spark", "amount": 1 },
+            "badge": "Word Inventor",
+            "message": "The workshop echoes with “{{answers.repair-word}}!”"
+          }
+        }
+      ],
+      "reward": {
+        "stars": 3,
+        "badge": "Dial Doctor",
+        "message": "The rain dial turns one bright click."
+      }
+    },
+    {
+      "id": "start-the-cloud-engine",
+      "title": "Start the Cloud Engine",
+      "summary": "Read the gauges and choose the final engine command.",
+      "parts": [
+        {
+          "id": "read-the-gauge",
+          "title": "Read the Gauge",
+          "narrative": "The blue needle points to the word DRIZZLE.",
+          "tasks": [
+            {
+              "id": "gauge-word",
+              "type": "single-input",
+              "prompt": "Type the word shown by the blue needle.",
+              "points": 10,
+              "placeholder": "Type one word",
+              "answer": {
+                "value": "drizzle",
+                "caseSensitive": false
+              }
+            }
+          ],
+          "reward": {
+            "stars": 1,
+            "message": "A soft cloud puffs from the engine."
+          }
+        },
+        {
+          "id": "choose-the-command",
+          "title": "Choose the Command",
+          "narrative": "{{hero.name}} calls “{{answers.repair-word}}!” and the command buttons sparkle.",
+          "tasks": [
+            {
+              "id": "gentle-rain-command",
+              "type": "multiple-choice",
+              "presentation": "choice",
+              "prompt": "Which command will make gentle rain instead of a storm?",
+              "points": 15,
+              "options": [
+                { "id": "command-sprinkle", "label": "Sprinkle slowly" },
+                { "id": "command-thunder", "label": "Thunder at full power" },
+                { "id": "command-freeze", "label": "Freeze every cloud" }
+              ],
+              "answer": { "optionId": "command-sprinkle" }
+            }
+          ],
+          "reward": {
+            "stars": 2,
+            "message": "Silver raindrops tap a happy rhythm."
+          }
+        }
+      ],
+      "reward": {
+        "stars": 3,
+        "badge": "Cloud Engineer",
+        "message": "{{sidekicks.0}} catches the first gentle raindrop."
+      }
+    }
+  ],
+  "reward": {
+    "stars": 6,
+    "collectible": { "type": "unicorn", "amount": 1 },
+    "badge": "Weather Workshop Hero",
+    "message": "The valley gardens receive a perfect silver shower."
+  }
+}

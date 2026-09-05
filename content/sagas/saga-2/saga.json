@@ -1,0 +1,15 @@
+{
+  "id": "saga-2",
+  "title": "The Clockwork Cloud",
+  "summary": "Help a floating workshop repair the machine that makes gentle rain.",
+  "coverImage": "☁️",
+  "audienceNote": "Playful language, patterns, and problem-solving for ages 8–9.",
+  "levels": [
+    {
+      "id": "workshop-in-the-sky",
+      "levelNumber": 1,
+      "file": "level1.json",
+      "title": "Workshop in the Sky"
+    }
+  ]
+}

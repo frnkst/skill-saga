@@ -1,0 +1,133 @@
+{
+  "id": "lanternwood-arrival",
+  "sagaId": "saga-1",
+  "levelNumber": 1,
+  "title": "The Whispering Gate",
+  "date": "2026-09-05",
+  "introduction": "{{hero.name}} and {{sidekicks.0}} reach a silver gate covered in sleepy vines.",
+  "quests": [
+    {
+      "id": "wake-the-gate",
+      "title": "Wake the Gate",
+      "summary": "Use careful thinking to persuade the old gate to open.",
+      "parts": [
+        {
+          "id": "count-the-lanterns",
+          "title": "Lantern Count",
+          "narrative": "Three branches hold two lanterns each. The gate asks for the total.",
+          "tasks": [
+            {
+              "id": "lantern-multiplication",
+              "type": "number-input",
+              "prompt": "How many lanterns are there altogether?",
+              "points": 10,
+              "hint": "Add 2 three times.",
+              "answer": {
+                "value": 6,
+                "tolerance": 0
+              }
+            }
+          ],
+          "reward": {
+            "stars": 1,
+            "message": "One vine curls away from the gate."
+          }
+        },
+        {
+          "id": "name-the-forest-friend",
+          "title": "A New Forest Friend",
+          "narrative": "A tiny moth offers to guide the travelers if it may have a name.",
+          "tasks": [
+            {
+              "id": "choose-moth-name",
+              "type": "creative-input",
+              "prompt": "Give the friendly moth a magical name.",
+              "points": 5,
+              "variableKey": "moth-name",
+              "minLength": 2,
+              "maxLength": 30,
+              "multiline": false
+            }
+          ],
+          "reward": {
+            "stars": 1,
+            "collectible": { "type": "story-spark", "amount": 1 },
+            "badge": "Friend Maker",
+            "message": "{{answers.moth-name}} glows with delight."
+          }
+        }
+      ],
+      "reward": {
+        "stars": 2,
+        "badge": "Gate Waker",
+        "message": "The Whispering Gate swings open."
+      }
+    },
+    {
+      "id": "follow-the-fireflies",
+      "title": "Follow the Fireflies",
+      "summary": "Read the signs and choose the safest moonlit trail.",
+      "parts": [
+        {
+          "id": "truthful-trail",
+          "title": "The Truthful Trail",
+          "narrative": "{{answers.moth-name}} says, “Fireflies always gather beside clean water.”",
+          "tasks": [
+            {
+              "id": "firefly-fact",
+              "type": "multiple-choice",
+              "presentation": "true-false",
+              "prompt": "The clue says the fireflies gather beside clean water. Is that true?",
+              "points": 10,
+              "options": [
+                { "id": "fact-true", "label": "True" },
+                { "id": "fact-false", "label": "False" }
+              ],
+              "answer": { "optionId": "fact-true" }
+            }
+          ],
+          "reward": {
+            "stars": 1,
+            "message": "The fireflies form a bright arrow."
+          }
+        },
+        {
+          "id": "cross-the-stream",
+          "title": "Cross the Stream",
+          "narrative": "The stepping stones must be crossed from smallest number to largest.",
+          "tasks": [
+            {
+              "id": "order-the-stones",
+              "type": "sequence",
+              "prompt": "Put the stepping stones in ascending order.",
+              "points": 15,
+              "items": [
+                { "id": "stone-eight", "label": "8" },
+                { "id": "stone-two", "label": "2" },
+                { "id": "stone-five", "label": "5" }
+              ],
+              "answer": {
+                "orderedItemIds": ["stone-two", "stone-five", "stone-eight"]
+              }
+            }
+          ],
+          "reward": {
+            "stars": 2,
+            "message": "{{hero.name}} reaches the moonlit bank safely."
+          }
+        }
+      ],
+      "reward": {
+        "stars": 3,
+        "collectible": { "type": "fairy", "amount": 1 },
+        "badge": "Firefly Friend",
+        "message": "{{answers.moth-name}} leads everyone to the lantern clearing."
+      }
+    }
+  ],
+  "reward": {
+    "stars": 5,
+    "badge": "Lanternwood Explorer",
+    "message": "The first moon lantern shines again."
+  }
+}

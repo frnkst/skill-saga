@@ -1,0 +1,1 @@
+export { getServiceSupabase } from "./server";
