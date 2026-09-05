@@ -79,29 +79,29 @@ create trigger part_progress_updated before update on public.part_progress
 create function public.record_guardian_login(p_attempt_key text, p_success boolean)
 returns table(allowed boolean, locked_until timestamptz)
 language plpgsql security definer set search_path = public as $$
-declare s public.guardian_login_state%rowtype; current_time timestamptz := clock_timestamp();
+declare s public.guardian_login_state%rowtype; now_at timestamptz := clock_timestamp();
 begin
   delete from public.guardian_login_state
-    where updated_at < current_time - interval '1 day';
+    where updated_at < now_at - interval '1 day';
   insert into public.guardian_login_state(attempt_key)
     values (p_attempt_key) on conflict do nothing;
   select * into s from public.guardian_login_state
     where attempt_key = p_attempt_key for update;
-  if s.locked_until is not null and s.locked_until > current_time then
+  if s.locked_until is not null and s.locked_until > now_at then
     return query select false, s.locked_until;
     return;
   end if;
   if p_success then
     update public.guardian_login_state set
-      failed_attempts = 0, window_started_at = current_time,
+      failed_attempts = 0, window_started_at = now_at,
       locked_until = null
       where attempt_key = p_attempt_key;
     return query select true, null::timestamptz;
     return;
   end if;
-  if s.window_started_at < current_time - interval '15 minutes' then
+  if s.window_started_at < now_at - interval '15 minutes' then
     s.failed_attempts := 1;
-    s.window_started_at := current_time;
+    s.window_started_at := now_at;
   else
     s.failed_attempts := s.failed_attempts + 1;
   end if;
@@ -109,12 +109,12 @@ begin
     failed_attempts = s.failed_attempts,
     window_started_at = s.window_started_at,
     locked_until = case
-      when s.failed_attempts >= 5 then current_time + interval '15 minutes'
+      when s.failed_attempts >= 5 then now_at + interval '15 minutes'
       else null
     end
     where attempt_key = p_attempt_key;
   return query select false, case
-    when s.failed_attempts >= 5 then current_time + interval '15 minutes'
+    when s.failed_attempts >= 5 then now_at + interval '15 minutes'
     else null
   end;
 end $$;

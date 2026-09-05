@@ -85,7 +85,7 @@ export function TaskPlayer({
       : task.type === "single-input" || task.type === "number-input" || task.type === "creative-input"
         ? text.trim().length > 0
         : true;
-  const successMessage = successMessageTemplate
+  const successMessage = state.status === "success" && successMessageTemplate
     ? interpolatePlainText(successMessageTemplate, {
         ...templateContext,
         answers: {
